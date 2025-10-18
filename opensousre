@@ -1,0 +1,1295 @@
+-- CHSEXTERNAL.pub Modern Menu with Adjusted Slider Positions
+local Player = game:GetService("Players").LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+-- Create ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "CHSEXTERNAL.pub"
+ScreenGui.Parent = PlayerGui
+
+-- Create Main Frame
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 450, 0, 450)
+MainFrame.Position = UDim2.new(0.5, -225, 0.5, -225)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+MainFrame.BackgroundTransparency = 0.1
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+
+-- Create Corner Radius
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 12)
+MainCorner.Parent = MainFrame
+
+-- Create Shadow Effect
+local MainShadow = Instance.new("ImageLabel")
+MainShadow.Size = UDim2.new(1, 10, 1, 10)
+MainShadow.Position = UDim2.new(0.5, -230, 0.5, -230)
+MainShadow.BackgroundTransparency = 1
+MainShadow.Image = "rbxassetid://5554236805"
+MainShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+MainShadow.ImageTransparency = 0.8
+MainShadow.ScaleType = Enum.ScaleType.Slice
+MainShadow.SliceCenter = Rect.new(23, 23, 277, 277)
+MainShadow.Visible = false
+MainShadow.Parent = ScreenGui
+
+-- Create Title Bar
+local TitleBar = Instance.new("Frame")
+TitleBar.Size = UDim2.new(1, 0, 0, 40)
+TitleBar.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+TitleBar.BorderSizePixel = 0
+TitleBar.Parent = MainFrame
+
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 12)
+TitleCorner.Parent = TitleBar
+
+-- Telegram Button
+local TelegramButton = Instance.new("TextButton")
+TelegramButton.Size = UDim2.new(0, 30, 0, 30)
+TelegramButton.Position = UDim2.new(0.02, 0, 0.5, -15)
+TelegramButton.BackgroundColor3 = Color3.fromRGB(0, 136, 204)
+TelegramButton.AutoButtonColor = false
+TelegramButton.Text = "📱"
+TelegramButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TelegramButton.Font = Enum.Font.GothamBold
+TelegramButton.TextSize = 16
+TelegramButton.Parent = TitleBar
+
+local TelegramCorner = Instance.new("UICorner")
+TelegramCorner.CornerRadius = UDim.new(0, 6)
+TelegramCorner.Parent = TelegramButton
+
+local TitleText = Instance.new("TextLabel")
+TitleText.Size = UDim2.new(1, -40, 1, 0)
+TitleText.Position = UDim2.new(0, 40, 0, 0)
+TitleText.BackgroundTransparency = 1
+TitleText.Text = "CHSEXTERNAL.pub"
+TitleText.TextColor3 = Color3.fromRGB(220, 220, 255)
+TitleText.Font = Enum.Font.GothamBold
+TitleText.TextSize = 18
+TitleText.Parent = TitleBar
+
+-- Create Tab Buttons Frame
+local TabFrame = Instance.new("Frame")
+TabFrame.Size = UDim2.new(1, 0, 0, 35)
+TabFrame.Position = UDim2.new(0, 0, 0, 40)
+TabFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+TabFrame.BorderSizePixel = 0
+TabFrame.Parent = MainFrame
+
+local TabCorner = Instance.new("UICorner")
+TabCorner.CornerRadius = UDim.new(0, 8)
+TabCorner.Parent = TabFrame
+
+-- Create Main Tab Button
+local MainTab = Instance.new("TextButton")
+MainTab.Size = UDim2.new(0.2, 0, 0.8, 0)
+MainTab.Position = UDim2.new(0.02, 0, 0.1, 0)
+MainTab.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+MainTab.AutoButtonColor = false
+MainTab.Text = "🛡BYPASS🔐"
+MainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+MainTab.Font = Enum.Font.GothamBold
+MainTab.TextSize = 12
+MainTab.Parent = TabFrame
+
+local MainTabCorner = Instance.new("UICorner")
+MainTabCorner.CornerRadius = UDim.new(0, 6)
+MainTabCorner.Parent = MainTab
+
+-- Create Visuals Tab Button
+local VisualsTab = Instance.new("TextButton")
+VisualsTab.Size = UDim2.new(0.2, 0, 0.8, 0)
+VisualsTab.Position = UDim2.new(0.24, 0, 0.1, 0)
+VisualsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+VisualsTab.AutoButtonColor = false
+VisualsTab.Text = "🟣VISUALS💜"
+VisualsTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+VisualsTab.Font = Enum.Font.GothamBold
+VisualsTab.TextSize = 12
+VisualsTab.Parent = TabFrame
+
+local VisualsTabCorner = Instance.new("UICorner")
+VisualsTabCorner.CornerRadius = UDim.new(0, 6)
+VisualsTabCorner.Parent = VisualsTab
+
+-- Create Rage Tab Button
+local RageTab = Instance.new("TextButton")
+RageTab.Size = UDim2.new(0.2, 0, 0.8, 0)
+RageTab.Position = UDim2.new(0.46, 0, 0.1, 0)
+RageTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+RageTab.AutoButtonColor = false
+RageTab.Text = "❌DONT WORK💔"
+RageTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+RageTab.Font = Enum.Font.GothamBold
+RageTab.TextSize = 12
+RageTab.Parent = TabFrame
+
+local RageTabCorner = Instance.new("UICorner")
+RageTabCorner.CornerRadius = UDim.new(0, 6)
+RageTabCorner.Parent = RageTab
+
+-- Create Misc Tab Button
+local MiscTab = Instance.new("TextButton")
+MiscTab.Size = UDim2.new(0.2, 0, 0.8, 0)
+MiscTab.Position = UDim2.new(0.68, 0, 0.1, 0)
+MiscTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+MiscTab.AutoButtonColor = false
+MiscTab.Text = "🟡MISC💛"
+MiscTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+MiscTab.Font = Enum.Font.GothamBold
+MiscTab.TextSize = 12
+MiscTab.Parent = TabFrame
+
+local MiscTabCorner = Instance.new("UICorner")
+MiscTabCorner.CornerRadius = UDim.new(0, 6)
+MiscTabCorner.Parent = MiscTab
+
+-- Create Content Frames
+local MainContent = Instance.new("Frame")
+MainContent.Size = UDim2.new(1, 0, 1, -130)
+MainContent.Position = UDim2.new(0, 0, 0, 75)
+MainContent.BackgroundTransparency = 1
+MainContent.Visible = true
+MainContent.Parent = MainFrame
+
+local VisualsContent = Instance.new("Frame")
+VisualsContent.Size = UDim2.new(1, 0, 1, -130)
+VisualsContent.Position = UDim2.new(0, 0, 0, 75)
+VisualsContent.BackgroundTransparency = 1
+VisualsContent.Visible = false
+VisualsContent.Parent = MainFrame
+
+local RageContent = Instance.new("Frame")
+RageContent.Size = UDim2.new(1, 0, 1, -130)
+RageContent.Position = UDim2.new(0, 0, 0, 75)
+RageContent.BackgroundTransparency = 1
+RageContent.Visible = false
+RageContent.Parent = MainFrame
+
+local MiscContent = Instance.new("Frame")
+MiscContent.Size = UDim2.new(1, 0, 1, -130)
+MiscContent.Position = UDim2.new(0, 0, 0, 75)
+MiscContent.BackgroundTransparency = 1
+MiscContent.Visible = false
+MiscContent.Parent = MainFrame
+
+-- Create Information Button at the bottom
+local InformationButton = Instance.new("TextButton")
+InformationButton.Size = UDim2.new(0.9, 0, 0, 50)
+InformationButton.Position = UDim2.new(0.05, 0, 0.85, 0)
+InformationButton.BackgroundColor3 = Color3.fromRGB(60, 60, 100)
+InformationButton.AutoButtonColor = false
+InformationButton.Text = "INFORMATION\nWelcome to CHSEXTERNAL.pub - Advanced Roblox Menu\nhttps://t.me/chsexternal"
+InformationButton.TextColor3 = Color3.fromRGB(220, 220, 255)
+InformationButton.Font = Enum.Font.GothamBold
+InformationButton.TextSize = 12
+InformationButton.TextWrapped = true
+InformationButton.Parent = MainFrame
+
+local InformationCorner = Instance.new("UICorner")
+InformationCorner.CornerRadius = UDim.new(0, 8)
+InformationCorner.Parent = InformationButton
+
+local InformationStroke = Instance.new("UIStroke")
+InformationStroke.Color = Color3.fromRGB(100, 100, 140)
+InformationStroke.Thickness = 3
+InformationStroke.Parent = InformationButton
+
+-- Create Chams Toggle in Visuals section
+local ChamsToggle = Instance.new("TextButton")
+ChamsToggle.Size = UDim2.new(0.8, 0, 0, 35)
+ChamsToggle.Position = UDim2.new(0.1, 0, 0.1, 0)
+ChamsToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+ChamsToggle.AutoButtonColor = false
+ChamsToggle.Text = "CHAMS: OFF"
+ChamsToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+ChamsToggle.Font = Enum.Font.Gotham
+ChamsToggle.TextSize = 14
+ChamsToggle.Parent = VisualsContent
+
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(0, 8)
+ToggleCorner.Parent = ChamsToggle
+
+local ToggleStroke = Instance.new("UIStroke")
+ToggleStroke.Color = Color3.fromRGB(80, 80, 90)
+ToggleStroke.Thickness = 2
+ToggleStroke.Parent = ChamsToggle
+
+-- Create ESP Skeleton Toggle in Visuals section
+local SkeletonToggle = Instance.new("TextButton")
+SkeletonToggle.Size = UDim2.new(0.8, 0, 0, 35)
+SkeletonToggle.Position = UDim2.new(0.1, 0, 0.3, 0)
+SkeletonToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+SkeletonToggle.AutoButtonColor = false
+SkeletonToggle.Text = "ESP SKELETON: OFF"
+SkeletonToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+SkeletonToggle.Font = Enum.Font.Gotham
+SkeletonToggle.TextSize = 14
+SkeletonToggle.Parent = VisualsContent
+
+local SkeletonCorner = Instance.new("UICorner")
+SkeletonCorner.CornerRadius = UDim.new(0, 8)
+SkeletonCorner.Parent = SkeletonToggle
+
+local SkeletonStroke = Instance.new("UIStroke")
+SkeletonStroke.Color = Color3.fromRGB(80, 80, 90)
+SkeletonStroke.Thickness = 2
+SkeletonStroke.Parent = SkeletonToggle
+
+-- Add example buttons to Main section
+local ExampleButton1 = Instance.new("TextButton")
+ExampleButton1.Size = UDim2.new(0.8, 0, 0, 35)
+ExampleButton1.Position = UDim2.new(0.1, 0, 0.1, 0)
+ExampleButton1.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+ExampleButton1.AutoButtonColor = false
+ExampleButton1.Text = "BYPASS ENABLE"
+ExampleButton1.TextColor3 = Color3.fromRGB(255, 100, 100)
+ExampleButton1.Font = Enum.Font.Gotham
+ExampleButton1.TextSize = 14
+ExampleButton1.Parent = MainContent
+
+local ExampleButton2 = Instance.new("TextButton")
+ExampleButton2.Size = UDim2.new(0.8, 0, 0, 35)
+ExampleButton2.Position = UDim2.new(0.1, 0, 0.3, 0)
+ExampleButton2.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+ExampleButton2.AutoButtonColor = false
+ExampleButton2.Text = "STATUS: 💚WORK✅"
+ExampleButton2.TextColor3 = Color3.fromRGB(255, 100, 100)
+ExampleButton2.Font = Enum.Font.Gotham
+ExampleButton2.TextSize = 14
+ExampleButton2.Parent = MainContent
+
+-- Add example buttons to Rage section
+local RageButton1 = Instance.new("TextButton")
+RageButton1.Size = UDim2.new(0.8, 0, 0, 35)
+RageButton1.Position = UDim2.new(0.1, 0, 0.1, 0)
+RageButton1.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+RageButton1.AutoButtonColor = false
+RageButton1.Text = "AIMBOT"
+RageButton1.TextColor3 = Color3.fromRGB(255, 100, 100)
+RageButton1.Font = Enum.Font.Gotham
+RageButton1.TextSize = 14
+RageButton1.Parent = RageContent
+
+local RageButton2 = Instance.new("TextButton")
+RageButton2.Size = UDim2.new(0.8, 0, 0, 35)
+RageButton2.Position = UDim2.new(0.1, 0, 0.3, 0)
+RageButton2.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+RageButton2.AutoButtonColor = false
+RageButton2.Text = "TRIGGERBOT"
+RageButton2.TextColor3 = Color3.fromRGB(255, 100, 100)
+RageButton2.Font = Enum.Font.Gotham
+RageButton2.TextSize = 14
+RageButton2.Parent = RageContent
+
+local RageButton3 = Instance.new("TextButton")
+RageButton3.Size = UDim2.new(0.8, 0, 0, 35)
+RageButton3.Position = UDim2.new(0.1, 0, 0.5, 0)
+RageButton3.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+RageButton3.AutoButtonColor = false
+RageButton3.Text = "SILENT AIM"
+RageButton3.TextColor3 = Color3.fromRGB(255, 100, 100)
+RageButton3.Font = Enum.Font.Gotham
+RageButton3.TextSize = 14
+RageButton3.Parent = RageContent
+
+-- WORKING MISC FUNCTIONS WITH SLIDERS
+local SpeedHackEnabled = false
+local FlyHackEnabled = false
+local NoClipEnabled = false
+local OriginalWalkSpeed = 16
+local OriginalJumpPower = 50
+local CurrentSpeed = 50
+local CurrentFlySpeed = 100
+
+-- Speed Hack Toggle
+local SpeedHackToggle = Instance.new("TextButton")
+SpeedHackToggle.Size = UDim2.new(0.8, 0, 0, 35)
+SpeedHackToggle.Position = UDim2.new(0.1, 0, 0.1, 0)
+SpeedHackToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+SpeedHackToggle.AutoButtonColor = false
+SpeedHackToggle.Text = "SPEED HACK: OFF"
+SpeedHackToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+SpeedHackToggle.Font = Enum.Font.Gotham
+SpeedHackToggle.TextSize = 14
+SpeedHackToggle.Parent = MiscContent
+
+-- Speed Hack Slider (positioned lower)
+local SpeedSlider = Instance.new("Frame")
+SpeedSlider.Size = UDim2.new(0.8, 0, 0, 30)
+SpeedSlider.Position = UDim2.new(0.1, 0, 0.25, 0) -- Lower position
+SpeedSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+SpeedSlider.Parent = MiscContent
+
+local SpeedSliderCorner = Instance.new("UICorner")
+SpeedSliderCorner.CornerRadius = UDim.new(0, 6)
+SpeedSliderCorner.Parent = SpeedSlider
+
+local SpeedSliderTrack = Instance.new("Frame")
+SpeedSliderTrack.Size = UDim2.new(0.9, 0, 0, 6)
+SpeedSliderTrack.Position = UDim2.new(0.05, 0, 0.5, -3)
+SpeedSliderTrack.BackgroundColor3 = Color3.fromRGB(80, 80, 90)
+SpeedSliderTrack.Parent = SpeedSlider
+
+local SpeedSliderTrackCorner = Instance.new("UICorner")
+SpeedSliderTrackCorner.CornerRadius = UDim.new(1, 0)
+SpeedSliderTrackCorner.Parent = SpeedSliderTrack
+
+local SpeedSliderFill = Instance.new("Frame")
+SpeedSliderFill.Size = UDim2.new(0.5, 0, 1, 0)
+SpeedSliderFill.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+SpeedSliderFill.Parent = SpeedSliderTrack
+
+local SpeedSliderFillCorner = Instance.new("UICorner")
+SpeedSliderFillCorner.CornerRadius = UDim.new(1, 0)
+SpeedSliderFillCorner.Parent = SpeedSliderFill
+
+local SpeedSliderButton = Instance.new("TextButton")
+SpeedSliderButton.Size = UDim2.new(0, 20, 0, 20)
+SpeedSliderButton.Position = UDim2.new(0.5, -10, 0.5, -10)
+SpeedSliderButton.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
+SpeedSliderButton.Text = ""
+SpeedSliderButton.Parent = SpeedSlider
+
+local SpeedSliderButtonCorner = Instance.new("UICorner")
+SpeedSliderButtonCorner.CornerRadius = UDim.new(1, 0)
+SpeedSliderButtonCorner.Parent = SpeedSliderButton
+
+local SpeedValueLabel = Instance.new("TextLabel")
+SpeedValueLabel.Size = UDim2.new(1, 0, 0, 20)
+SpeedValueLabel.Position = UDim2.new(0, 0, 0, -25)
+SpeedValueLabel.BackgroundTransparency = 1
+SpeedValueLabel.Text = "Speed: 50"
+SpeedValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpeedValueLabel.Font = Enum.Font.Gotham
+SpeedValueLabel.TextSize = 12
+SpeedValueLabel.Parent = SpeedSlider
+
+-- Fly Hack Toggle
+local FlyHackToggle = Instance.new("TextButton")
+FlyHackToggle.Size = UDim2.new(0.8, 0, 0, 35)
+FlyHackToggle.Position = UDim2.new(0.1, 0, 0.45, 0) -- Adjusted position
+FlyHackToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+FlyHackToggle.AutoButtonColor = false
+FlyHackToggle.Text = "FLY HACK: OFF"
+FlyHackToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+FlyHackToggle.Font = Enum.Font.Gotham
+FlyHackToggle.TextSize = 14
+FlyHackToggle.Parent = MiscContent
+
+-- Fly Speed Slider (positioned lower)
+local FlySpeedSlider = Instance.new("Frame")
+FlySpeedSlider.Size = UDim2.new(0.8, 0, 0, 30)
+FlySpeedSlider.Position = UDim2.new(0.1, 0, 0.6, 0) -- Lower position
+FlySpeedSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 60)
+FlySpeedSlider.Parent = MiscContent
+
+local FlySpeedSliderCorner = Instance.new("UICorner")
+FlySpeedSliderCorner.CornerRadius = UDim.new(0, 6)
+FlySpeedSliderCorner.Parent = FlySpeedSlider
+
+local FlySpeedSliderTrack = Instance.new("Frame")
+FlySpeedSliderTrack.Size = UDim2.new(0.9, 0, 0, 6)
+FlySpeedSliderTrack.Position = UDim2.new(0.05, 0, 0.5, -3)
+FlySpeedSliderTrack.BackgroundColor3 = Color3.fromRGB(80, 80, 90)
+FlySpeedSliderTrack.Parent = FlySpeedSlider
+
+local FlySpeedSliderTrackCorner = Instance.new("UICorner")
+FlySpeedSliderTrackCorner.CornerRadius = UDim.new(1, 0)
+FlySpeedSliderTrackCorner.Parent = FlySpeedSliderTrack
+
+local FlySpeedSliderFill = Instance.new("Frame")
+FlySpeedSliderFill.Size = UDim2.new(1.0, 0, 1, 0)
+FlySpeedSliderFill.BackgroundColor3 = Color3.fromRGB(100, 150, 200)
+FlySpeedSliderFill.Parent = FlySpeedSliderTrack
+
+local FlySpeedSliderFillCorner = Instance.new("UICorner")
+FlySpeedSliderFillCorner.CornerRadius = UDim.new(1, 0)
+FlySpeedSliderFillCorner.Parent = FlySpeedSliderFill
+
+local FlySpeedSliderButton = Instance.new("TextButton")
+FlySpeedSliderButton.Size = UDim2.new(0, 20, 0, 20)
+FlySpeedSliderButton.Position = UDim2.new(1.0, -10, 0.5, -10)
+FlySpeedSliderButton.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
+FlySpeedSliderButton.Text = ""
+FlySpeedSliderButton.Parent = FlySpeedSlider
+
+local FlySpeedSliderButtonCorner = Instance.new("UICorner")
+FlySpeedSliderButtonCorner.CornerRadius = UDim.new(1, 0)
+FlySpeedSliderButtonCorner.Parent = FlySpeedSliderButton
+
+local FlySpeedValueLabel = Instance.new("TextLabel")
+FlySpeedValueLabel.Size = UDim2.new(1, 0, 0, 20)
+FlySpeedValueLabel.Position = UDim2.new(0, 0, 0, -25)
+FlySpeedValueLabel.BackgroundTransparency = 1
+FlySpeedValueLabel.Text = "Fly Speed: 100"
+FlySpeedValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+FlySpeedValueLabel.Font = Enum.Font.Gotham
+FlySpeedValueLabel.TextSize = 12
+FlySpeedValueLabel.Parent = FlySpeedSlider
+
+-- No Clip Toggle
+local NoClipToggle = Instance.new("TextButton")
+NoClipToggle.Size = UDim2.new(0.8, 0, 0, 35)
+NoClipToggle.Position = UDim2.new(0.1, 0, 0.8, 0) -- Adjusted position
+NoClipToggle.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+NoClipToggle.AutoButtonColor = false
+NoClipToggle.Text = "NO CLIP: OFF"
+NoClipToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+NoClipToggle.Font = Enum.Font.Gotham
+NoClipToggle.TextSize = 14
+NoClipToggle.Parent = MiscContent
+
+-- Apply corner and stroke to all buttons
+local function setupButton(button)
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 8)
+	corner.Parent = button
+
+	local stroke = Instance.new("UIStroke")
+	stroke.Color = Color3.fromRGB(80, 80, 90)
+	stroke.Thickness = 2
+	stroke.Parent = button
+end
+
+setupButton(ExampleButton1)
+setupButton(ExampleButton2)
+setupButton(RageButton1)
+setupButton(RageButton2)
+setupButton(RageButton3)
+setupButton(SpeedHackToggle)
+setupButton(FlyHackToggle)
+setupButton(NoClipToggle)
+
+-- Control Buttons Frame
+local ControlFrame = Instance.new("Frame")
+ControlFrame.Size = UDim2.new(1, 0, 0, 30)
+ControlFrame.Position = UDim2.new(0, 0, 1, -30)
+ControlFrame.BackgroundTransparency = 1
+ControlFrame.Parent = MainFrame
+
+-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 25, 0, 25)
+CloseButton.Position = UDim2.new(1, -30, 0, 2)
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+CloseButton.AutoButtonColor = false
+CloseButton.Text = "×"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 18
+CloseButton.Parent = ControlFrame
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 6)
+CloseCorner.Parent = CloseButton
+
+-- Minimize Button
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Size = UDim2.new(0, 25, 0, 25)
+MinimizeButton.Position = UDim2.new(1, -60, 0, 2)
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 180, 60)
+MinimizeButton.AutoButtonColor = false
+MinimizeButton.Text = "−"
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.Font = Enum.Font.GothamBold
+MinimizeButton.TextSize = 18
+MinimizeButton.Parent = ControlFrame
+
+local MinimizeCorner = Instance.new("UICorner")
+MinimizeCorner.CornerRadius = UDim.new(0, 6)
+MinimizeCorner.Parent = MinimizeButton
+
+-- Create Insert Text Label
+local InsertText = Instance.new("TextLabel")
+InsertText.Size = UDim2.new(0, 400, 0, 50)
+InsertText.Position = UDim2.new(0.5, -200, 0.1, 0)
+InsertText.BackgroundTransparency = 1
+InsertText.Text = "PRESS [INSERT] TO OPEN MENU"
+InsertText.TextColor3 = Color3.fromRGB(220, 220, 255)
+InsertText.TextTransparency = 0.2
+InsertText.Font = Enum.Font.GothamBold
+InsertText.TextSize = 24
+InsertText.TextStrokeTransparency = 0.8
+InsertText.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+InsertText.Visible = false
+InsertText.Parent = ScreenGui
+
+-- Variables
+local ChamsEnabled = false
+local SkeletonEnabled = false
+local ChamsColor = Color3.fromRGB(255, 80, 80)
+local SkeletonColor = Color3.fromRGB(0, 255, 255)
+local HighlightObjects = {}
+local SkeletonLines = {}
+local IsMinimized = false
+local IsMenuOpen = false
+local IsAnimating = false
+local CurrentTab = "Main"
+local OriginalSize = UDim2.new(0, 450, 0, 450)
+local MinimizedSize = UDim2.new(0, 450, 0, 40)
+
+-- Fly variables
+local Flying = false
+local FlyConnection
+
+-- Telegram button function
+TelegramButton.MouseButton1Click:Connect(function()
+	local success, result = pcall(function()
+		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+	end)
+
+	if not success then
+		-- Fallback: Try to open browser
+		pcall(function()
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "CHSEXTERNAL.pub",
+				Text = "Opening Telegram: t.me/chsexternal",
+				Duration = 3
+			})
+		end)
+	end
+end)
+
+-- Rainbow color animation for title
+local function startRainbowTitle()
+	local time = 0
+	local connection
+
+	connection = RunService.Heartbeat:Connect(function(delta)
+		time = time + delta
+		local hue = (time * 0.5) % 1
+
+		local colors = {
+			Color3.fromRGB(180, 120, 255),
+			Color3.fromRGB(160, 100, 240),
+			Color3.fromRGB(140, 80, 220),
+			Color3.fromRGB(120, 60, 200),
+			Color3.fromRGB(100, 40, 180),
+			Color3.fromRGB(120, 60, 200),
+			Color3.fromRGB(140, 80, 220),
+			Color3.fromRGB(160, 100, 240),
+		}
+
+		local colorIndex = math.floor((time * 2) % #colors) + 1
+		local nextIndex = (colorIndex % #colors) + 1
+		local progress = (time * 2) % 1
+
+		local currentColor = colors[colorIndex]
+		local nextColor = colors[nextIndex]
+
+		TitleText.TextColor3 = currentColor:Lerp(nextColor, progress)
+	end)
+
+	return connection
+end
+
+-- Start rainbow animation
+local rainbowConnection = startRainbowTitle()
+
+-- ESP Skeleton Function
+local function createSkeletonLine()
+	local line = Instance.new("Frame")
+	line.BackgroundColor3 = SkeletonColor
+	line.BorderSizePixel = 0
+	line.Size = UDim2.new(0, 2, 0, 2)
+	line.Visible = false
+	line.Parent = ScreenGui
+	return line
+end
+
+local function updateSkeleton()
+	for player, lines in pairs(SkeletonLines) do
+		if player ~= Player and player.Character then
+			local character = player.Character
+			local humanoid = character:FindFirstChild("Humanoid")
+
+			if humanoid and humanoid.Health > 0 then
+				local connections = {
+					{"Head", "UpperTorso"},
+					{"UpperTorso", "LowerTorso"},
+					{"UpperTorso", "LeftUpperArm"},
+					{"LeftUpperArm", "LeftLowerArm"},
+					{"LeftLowerArm", "LeftHand"},
+					{"UpperTorso", "RightUpperArm"},
+					{"RightUpperArm", "RightLowerArm"},
+					{"RightLowerArm", "RightHand"},
+					{"LowerTorso", "LeftUpperLeg"},
+					{"LeftUpperLeg", "LeftLowerLeg"},
+					{"LeftLowerLeg", "LeftFoot"},
+					{"LowerTorso", "RightUpperLeg"},
+					{"RightUpperLeg", "RightLowerLeg"},
+					{"RightLowerLeg", "RightFoot"}
+				}
+
+				for i, connection in pairs(connections) do
+					local part1 = character:FindFirstChild(connection[1])
+					local part2 = character:FindFirstChild(connection[2])
+
+					if part1 and part2 then
+						local point1, visible1 = workspace.CurrentCamera:WorldToViewportPoint(part1.Position)
+						local point2, visible2 = workspace.CurrentCamera:WorldToViewportPoint(part2.Position)
+
+						if visible1 and visible2 then
+							local line = lines[i]
+							if not line then
+								line = createSkeletonLine()
+								lines[i] = line
+							end
+
+							local distance = (Vector2.new(point1.X, point1.Y) - Vector2.new(point2.X, point2.Y)).Magnitude
+							local angle = math.atan2(point2.Y - point1.Y, point2.X - point1.X)
+
+							line.Size = UDim2.new(0, distance, 0, 2)
+							line.Position = UDim2.new(0, point1.X, 0, point1.Y)
+							line.Rotation = math.deg(angle)
+							line.Visible = true
+						else
+							if lines[i] then
+								lines[i].Visible = false
+							end
+						end
+					else
+						if lines[i] then
+							lines[i].Visible = false
+						end
+					end
+				end
+			else
+				for _, line in pairs(lines) do
+					line.Visible = false
+				end
+			end
+		else
+			for _, line in pairs(lines) do
+				if line then
+					line.Visible = false
+				end
+			end
+		end
+	end
+end
+
+local function applySkeleton(player)
+	if player == Player then return end
+	SkeletonLines[player] = {}
+end
+
+local function removeSkeleton(player)
+	if SkeletonLines[player] then
+		for _, line in pairs(SkeletonLines[player]) do
+			if line then
+				line:Destroy()
+			end
+		end
+		SkeletonLines[player] = nil
+	end
+end
+
+-- Skeleton update loop
+RunService.RenderStepped:Connect(function()
+	if SkeletonEnabled then
+		updateSkeleton()
+	end
+end)
+
+-- WORKING MISC FUNCTIONS WITH SLIDERS
+
+-- Speed Hack Function
+local function toggleSpeedHack()
+	SpeedHackEnabled = not SpeedHackEnabled
+
+	if SpeedHackEnabled then
+		SpeedHackToggle.Text = "SPEED HACK: ON"
+		SpeedHackToggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+		local character = Player.Character
+		if character then
+			local humanoid = character:FindFirstChild("Humanoid")
+			if humanoid then
+				OriginalWalkSpeed = humanoid.WalkSpeed
+				humanoid.WalkSpeed = CurrentSpeed
+			end
+		end
+	else
+		SpeedHackToggle.Text = "SPEED HACK: OFF"
+		SpeedHackToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+		local character = Player.Character
+		if character then
+			local humanoid = character:FindFirstChild("Humanoid")
+			if humanoid then
+				humanoid.WalkSpeed = OriginalWalkSpeed
+			end
+		end
+	end
+end
+
+-- Fly Hack Function
+local function toggleFlyHack()
+	FlyHackEnabled = not FlyHackEnabled
+
+	if FlyHackEnabled then
+		FlyHackToggle.Text = "FLY HACK: ON"
+		FlyHackToggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+		local character = Player.Character
+		if character then
+			local humanoid = character:FindFirstChild("Humanoid")
+			local rootPart = character:FindFirstChild("HumanoidRootPart")
+
+			if humanoid and rootPart then
+				Flying = true
+
+				-- Enable flying
+				humanoid.PlatformStand = true
+
+				FlyConnection = RunService.Heartbeat:Connect(function()
+					if not Flying then
+						FlyConnection:Disconnect()
+						return
+					end
+
+					local camera = workspace.CurrentCamera
+					local moveDirection = Vector3.new(0, 0, 0)
+
+					-- Movement controls
+					if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+						moveDirection = moveDirection + camera.CFrame.LookVector
+					end
+					if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+						moveDirection = moveDirection - camera.CFrame.LookVector
+					end
+					if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+						moveDirection = moveDirection - camera.CFrame.RightVector
+					end
+					if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+						moveDirection = moveDirection + camera.CFrame.RightVector
+					end
+					if UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+						moveDirection = moveDirection + Vector3.new(0, 1, 0)
+					end
+					if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
+						moveDirection = moveDirection - Vector3.new(0, 1, 0)
+					end
+
+					-- Apply movement with adjustable speed
+					if moveDirection.Magnitude > 0 then
+						moveDirection = moveDirection.Unit * CurrentFlySpeed
+						rootPart.Velocity = moveDirection
+					else
+						rootPart.Velocity = Vector3.new(0, 0, 0)
+					end
+				end)
+			end
+		end
+	else
+		FlyHackToggle.Text = "FLY HACK: OFF"
+		FlyHackToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+		Flying = false
+		if FlyConnection then
+			FlyConnection:Disconnect()
+		end
+
+		local character = Player.Character
+		if character then
+			local humanoid = character:FindFirstChild("Humanoid")
+			if humanoid then
+				humanoid.PlatformStand = false
+			end
+		end
+	end
+end
+
+-- No Clip Function
+local function toggleNoClip()
+	NoClipEnabled = not NoClipEnabled
+
+	if NoClipEnabled then
+		NoClipToggle.Text = "NO CLIP: ON"
+		NoClipToggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+		local character = Player.Character
+		if character then
+			for _, part in pairs(character:GetDescendants()) do
+				if part:IsA("BasePart") then
+					part.CanCollide = false
+				end
+			end
+		end
+	else
+		NoClipToggle.Text = "NO CLIP: OFF"
+		NoClipToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+		local character = Player.Character
+		if character then
+			for _, part in pairs(character:GetDescendants()) do
+				if part:IsA("BasePart") then
+					part.CanCollide = true
+				end
+			end
+		end
+	end
+end
+
+-- Handle character respawn for misc functions
+Player.CharacterAdded:Connect(function(character)
+	wait(1) -- Wait for character to load
+
+	if SpeedHackEnabled then
+		local humanoid = character:FindFirstChild("Humanoid")
+		if humanoid then
+			humanoid.WalkSpeed = CurrentSpeed
+		end
+	end
+
+	if NoClipEnabled then
+		for _, part in pairs(character:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.CanCollide = false
+			end
+		end
+	end
+end)
+
+-- Slider functions
+local function updateSpeedSlider(value)
+	value = math.clamp(value, 16, 200) -- Limit between 16 and 200
+	CurrentSpeed = value
+	SpeedSliderFill.Size = UDim2.new((value - 16) / 184, 0, 1, 0)
+	SpeedSliderButton.Position = UDim2.new((value - 16) / 184, -10, 0.5, -10)
+	SpeedValueLabel.Text = "Speed: " .. math.floor(value)
+
+	if SpeedHackEnabled then
+		local character = Player.Character
+		if character then
+			local humanoid = character:FindFirstChild("Humanoid")
+			if humanoid then
+				humanoid.WalkSpeed = CurrentSpeed
+			end
+		end
+	end
+end
+
+local function updateFlySpeedSlider(value)
+	value = math.clamp(value, 50, 300) -- Limit between 50 and 300
+	CurrentFlySpeed = value
+	FlySpeedSliderFill.Size = UDim2.new((value - 50) / 250, 0, 1, 0)
+	FlySpeedSliderButton.Position = UDim2.new((value - 50) / 250, -10, 0.5, -10)
+	FlySpeedValueLabel.Text = "Fly Speed: " .. math.floor(value)
+end
+
+-- Initialize sliders
+updateSpeedSlider(50)
+updateFlySpeedSlider(100)
+
+-- Slider dragging
+local speedDragging = false
+local flySpeedDragging = false
+
+SpeedSliderButton.MouseButton1Down:Connect(function()
+	speedDragging = true
+end)
+
+FlySpeedSliderButton.MouseButton1Down:Connect(function()
+	flySpeedDragging = true
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		speedDragging = false
+		flySpeedDragging = false
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement then
+		if speedDragging then
+			local mousePos = UserInputService:GetMouseLocation()
+			local sliderPos = SpeedSlider.AbsolutePosition
+			local sliderSize = SpeedSlider.AbsoluteSize
+			local relativeX = (mousePos.X - sliderPos.X) / sliderSize.X
+			relativeX = math.clamp(relativeX, 0, 1)
+			local value = 16 + (relativeX * 184)
+			updateSpeedSlider(value)
+		elseif flySpeedDragging then
+			local mousePos = UserInputService:GetMouseLocation()
+			local sliderPos = FlySpeedSlider.AbsolutePosition
+			local sliderSize = FlySpeedSlider.AbsoluteSize
+			local relativeX = (mousePos.X - sliderPos.X) / sliderSize.X
+			relativeX = math.clamp(relativeX, 0, 1)
+			local value = 50 + (relativeX * 250)
+			updateFlySpeedSlider(value)
+		end
+	end
+end)
+
+-- Tab switching function
+local function switchTab(tabName)
+	-- Reset all tabs
+	MainContent.Visible = false
+	VisualsContent.Visible = false
+	RageContent.Visible = false
+	MiscContent.Visible = false
+
+	MainTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+	MainTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+	VisualsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+	VisualsTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+	RageTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+	RageTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+	MiscTab.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+	MiscTab.TextColor3 = Color3.fromRGB(180, 180, 200)
+
+	-- Activate selected tab
+	if tabName == "Main" then
+		MainContent.Visible = true
+		MainTab.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+		MainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+	elseif tabName == "Visuals" then
+		VisualsContent.Visible = true
+		VisualsTab.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+		VisualsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+	elseif tabName == "Rage" then
+		RageContent.Visible = true
+		RageTab.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+		RageTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+	elseif tabName == "Misc" then
+		MiscContent.Visible = true
+		MiscTab.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+		MiscTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+	end
+
+	CurrentTab = tabName
+end
+
+-- Animation function
+local function animateButton(button)
+	local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(button, tweenInfo, {BackgroundColor3 = Color3.fromRGB(65, 65, 75)})
+	tween:Play()
+
+	delay(0.1, function()
+		local tweenBack = TweenService:Create(button, tweenInfo, {BackgroundColor3 = Color3.fromRGB(45, 45, 55)})
+		tweenBack:Play()
+	end)
+end
+
+-- Smooth open/close functions
+local function openMenu()
+	if IsAnimating then return end
+	IsAnimating = true
+
+	MainFrame.Visible = true
+	MainShadow.Visible = true
+	InsertText.Visible = false
+
+	MainFrame.Size = UDim2.new(0, 10, 0, 10)
+	MainFrame.Position = UDim2.new(0.5, -5, 0.5, -5)
+	MainFrame.BackgroundTransparency = 1
+
+	local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+	local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = OriginalSize, Position = UDim2.new(0.5, -225, 0.5, -225)})
+	local transparencyTween = TweenService:Create(MainFrame, TweenInfo.new(0.2), {BackgroundTransparency = 0.1})
+
+	sizeTween:Play()
+	transparencyTween:Play()
+
+	local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(1, 10, 1, 10), Position = UDim2.new(0.5, -230, 0.5, -230)})
+	shadowTween:Play()
+
+	sizeTween.Completed:Connect(function()
+		IsAnimating = false
+		IsMenuOpen = true
+	end)
+end
+
+local function closeMenu()
+	if IsAnimating then return end
+	IsAnimating = true
+
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+	local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = UDim2.new(0, 10, 0, 10), Position = UDim2.new(0.5, -5, 0.5, -5)})
+	local transparencyTween = TweenService:Create(MainFrame, TweenInfo.new(0.15), {BackgroundTransparency = 1})
+
+	sizeTween:Play()
+	transparencyTween:Play()
+
+	local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(0, 20, 0, 20), Position = UDim2.new(0.5, -10, 0.5, -10)})
+	shadowTween:Play()
+
+	sizeTween.Completed:Connect(function()
+		MainFrame.Visible = false
+		MainShadow.Visible = false
+		InsertText.Visible = true
+		IsAnimating = false
+		IsMenuOpen = false
+	end)
+end
+
+-- Smooth minimize/maximize functions
+local function minimizeMenu()
+	if IsAnimating then return end
+	IsAnimating = true
+
+	local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = MinimizedSize})
+	local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(1, 10, 0, 50), Position = UDim2.new(0.5, -230, 0.5, -55)})
+
+	sizeTween:Play()
+	shadowTween:Play()
+
+	TabFrame.Visible = false
+	MainContent.Visible = false
+	VisualsContent.Visible = false
+	RageContent.Visible = false
+	MiscContent.Visible = false
+	InformationButton.Visible = false
+
+	sizeTween.Completed:Connect(function()
+		IsAnimating = false
+		IsMinimized = true
+		MinimizeButton.Text = "+"
+	end)
+end
+
+local function maximizeMenu()
+	if IsAnimating then return end
+	IsAnimating = true
+
+	local tweenInfo = TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = OriginalSize})
+	local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(1, 10, 1, 10), Position = UDim2.new(0.5, -230, 0.5, -230)})
+
+	sizeTween:Play()
+	shadowTween:Play()
+
+	sizeTween.Completed:Connect(function()
+		TabFrame.Visible = true
+		InformationButton.Visible = true
+		switchTab(CurrentTab)
+		IsAnimating = false
+		IsMinimized = false
+		MinimizeButton.Text = "−"
+	end)
+end
+
+-- Function to apply chams to player
+local function applyChams(player)
+	if player == Player then return end
+
+	if player.Character then
+		local highlight = Instance.new("Highlight")
+		highlight.Name = "CHSEXTERNAL_Chams"
+		highlight.FillColor = ChamsColor
+		highlight.OutlineColor = ChamsColor
+		highlight.FillTransparency = 0.3
+		highlight.OutlineTransparency = 0
+		highlight.Parent = player.Character
+
+		HighlightObjects[player] = highlight
+	end
+end
+
+-- Function to remove chams from player
+local function removeChams(player)
+	if HighlightObjects[player] then
+		HighlightObjects[player]:Destroy()
+		HighlightObjects[player] = nil
+	end
+end
+
+-- Toggle Chams function
+ChamsToggle.MouseButton1Click:Connect(function()
+	animateButton(ChamsToggle)
+	ChamsEnabled = not ChamsEnabled
+
+	if ChamsEnabled then
+		ChamsToggle.Text = "CHAMS: ON"
+		ChamsToggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+		for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+			applyChams(player)
+		end
+	else
+		ChamsToggle.Text = "CHAMS: OFF"
+		ChamsToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+		for player, highlight in pairs(HighlightObjects) do
+			removeChams(player)
+		end
+		HighlightObjects = {}
+	end
+end)
+
+-- Toggle Skeleton function
+SkeletonToggle.MouseButton1Click:Connect(function()
+	animateButton(SkeletonToggle)
+	SkeletonEnabled = not SkeletonEnabled
+
+	if SkeletonEnabled then
+		SkeletonToggle.Text = "ESP SKELETON: ON"
+		SkeletonToggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+		for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+			applySkeleton(player)
+		end
+	else
+		SkeletonToggle.Text = "ESP SKELETON: OFF"
+		SkeletonToggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+		for player, lines in pairs(SkeletonLines) do
+			removeSkeleton(player)
+		end
+		SkeletonLines = {}
+	end
+end)
+
+-- Misc functions toggles
+SpeedHackToggle.MouseButton1Click:Connect(function()
+	animateButton(SpeedHackToggle)
+	toggleSpeedHack()
+end)
+
+FlyHackToggle.MouseButton1Click:Connect(function()
+	animateButton(FlyHackToggle)
+	toggleFlyHack()
+end)
+
+NoClipToggle.MouseButton1Click:Connect(function()
+	animateButton(NoClipToggle)
+	toggleNoClip()
+end)
+
+-- Button hover effects
+local function setupButtonHover(button)
+	button.MouseEnter:Connect(function()
+		local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+		local tween = TweenService:Create(button, tweenInfo, {BackgroundColor3 = Color3.fromRGB(55, 55, 65)})
+		tween:Play()
+	end)
+
+	button.MouseLeave:Connect(function()
+		local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+		local tween = TweenService:Create(button, tweenInfo, {BackgroundColor3 = Color3.fromRGB(45, 45, 55)})
+		tween:Play()
+	end)
+end
+
+-- Information button hover effect
+InformationButton.MouseEnter:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(InformationButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(80, 80, 120)})
+	tween:Play()
+end)
+
+InformationButton.MouseLeave:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(InformationButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(60, 60, 100)})
+	tween:Play()
+end)
+
+-- Telegram button hover effect
+TelegramButton.MouseEnter:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(TelegramButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(0, 160, 220)})
+	tween:Play()
+end)
+
+TelegramButton.MouseLeave:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(TelegramButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(0, 136, 204)})
+	tween:Play()
+end)
+
+-- Setup hover for all buttons
+local allButtons = {ChamsToggle, SkeletonToggle, ExampleButton1, ExampleButton2, RageButton1, RageButton2, RageButton3, SpeedHackToggle, FlyHackToggle, NoClipToggle}
+for _, button in pairs(allButtons) do
+	setupButtonHover(button)
+end
+
+-- Tab button clicks
+MainTab.MouseButton1Click:Connect(function()
+	switchTab("Main")
+end)
+
+VisualsTab.MouseButton1Click:Connect(function()
+	switchTab("Visuals")
+end)
+
+RageTab.MouseButton1Click:Connect(function()
+	switchTab("Rage")
+end)
+
+MiscTab.MouseButton1Click:Connect(function()
+	switchTab("Misc")
+end)
+
+-- Minimize/Maximize function
+MinimizeButton.MouseButton1Click:Connect(function()
+	if IsMinimized then
+		maximizeMenu()
+	else
+		minimizeMenu()
+	end
+end)
+
+-- Insert key handler
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+
+	if input.KeyCode == Enum.KeyCode.Insert then
+		if IsMenuOpen then
+			closeMenu()
+		else
+			openMenu()
+		end
+	end
+end)
+
+-- Handle new players
+game:GetService("Players").PlayerAdded:Connect(function(player)
+	if ChamsEnabled then
+		player.CharacterAdded:Connect(function()
+			applyChams(player)
+		end)
+	end
+	if SkeletonEnabled then
+		player.CharacterAdded:Connect(function()
+			applySkeleton(player)
+		end)
+	end
+end)
+
+-- Handle existing players
+for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+	player.CharacterAdded:Connect(function()
+		if ChamsEnabled then
+			applyChams(player)
+		end
+		if SkeletonEnabled then
+			applySkeleton(player)
+		end
+	end)
+end
+
+-- Close menu
+CloseButton.MouseButton1Click:Connect(function()
+	closeMenu()
+end)
+
+-- Initial setup
+InsertText.Visible = true
+MainFrame.Visible = false
+MainShadow.Visible = false
+switchTab("Main")
