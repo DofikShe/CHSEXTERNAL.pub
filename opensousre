@@ -10,6 +10,43 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "CHSEXTERNAL.pub"
 ScreenGui.Parent = PlayerGui
 
+-- Create Round Close Button (добавлено в начало)
+local RoundCloseButton = Instance.new("TextButton")
+RoundCloseButton.Size = UDim2.new(0, 60, 0, 60)
+RoundCloseButton.Position = UDim2.new(0.5, -30, 0.5, -30)
+RoundCloseButton.BackgroundColor3 = Color3.fromRGB(60, 60, 100)
+RoundCloseButton.AutoButtonColor = false
+RoundCloseButton.Text = "📱"
+RoundCloseButton.TextColor3 = Color3.fromRGB(220, 220, 255)
+RoundCloseButton.Font = Enum.Font.GothamBold
+RoundCloseButton.TextSize = 20
+RoundCloseButton.Visible = false
+RoundCloseButton.Active = true
+RoundCloseButton.Draggable = true
+RoundCloseButton.Parent = ScreenGui
+
+local RoundCloseCorner = Instance.new("UICorner")
+RoundCloseCorner.CornerRadius = UDim.new(1, 0)
+RoundCloseCorner.Parent = RoundCloseButton
+
+local RoundCloseStroke = Instance.new("UIStroke")
+RoundCloseStroke.Color = Color3.fromRGB(100, 100, 140)
+RoundCloseStroke.Thickness = 3
+RoundCloseStroke.Parent = RoundCloseButton
+
+-- Shadow for round button
+local RoundCloseShadow = Instance.new("ImageLabel")
+RoundCloseShadow.Size = UDim2.new(1, 10, 1, 10)
+RoundCloseShadow.Position = UDim2.new(0, -5, 0, -5)
+RoundCloseShadow.BackgroundTransparency = 1
+RoundCloseShadow.Image = "rbxassetid://5554236805"
+RoundCloseShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+RoundCloseShadow.ImageTransparency = 0.8
+RoundCloseShadow.ScaleType = Enum.ScaleType.Slice
+RoundCloseShadow.SliceCenter = Rect.new(23, 23, 277, 277)
+RoundCloseShadow.Visible = false
+RoundCloseShadow.Parent = RoundCloseButton
+
 -- Create Main Frame
 local MainFrame = Instance.new("Frame")
 MainFrame.Size = UDim2.new(0, 450, 0, 450)
@@ -985,35 +1022,56 @@ local function animateButton(button)
 	end)
 end
 
--- Smooth open/close functions
+-- MODIFIED: Smooth open/close functions with round button
 local function openMenu()
 	if IsAnimating then return end
 	IsAnimating = true
 
-	MainFrame.Visible = true
-	MainShadow.Visible = true
-	InsertText.Visible = false
+	-- Hide round button with animation
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+	local roundTween = TweenService:Create(RoundCloseButton, tweenInfo, {
+		Size = UDim2.new(0, 10, 0, 10),
+		Position = UDim2.new(0.5, -5, 0.5, -5),
+		BackgroundTransparency = 1
+	})
+	roundTween:Play()
 
-	MainFrame.Size = UDim2.new(0, 10, 0, 10)
-	MainFrame.Position = UDim2.new(0.5, -5, 0.5, -5)
-	MainFrame.BackgroundTransparency = 1
+	local shadowRoundTween = TweenService:Create(RoundCloseShadow, tweenInfo, {
+		Size = UDim2.new(0, 20, 0, 20),
+		Position = UDim2.new(0, -10, 0, -10)
+	})
+	shadowRoundTween:Play()
 
-	local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
-	local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = OriginalSize, Position = UDim2.new(0.5, -225, 0.5, -225)})
-	local transparencyTween = TweenService:Create(MainFrame, TweenInfo.new(0.2), {BackgroundTransparency = 0.1})
+	roundTween.Completed:Connect(function()
+		RoundCloseButton.Visible = false
+		RoundCloseShadow.Visible = false
 
-	sizeTween:Play()
-	transparencyTween:Play()
+		-- Open main menu
+		MainFrame.Visible = true
+		MainShadow.Visible = true
 
-	local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(1, 10, 1, 10), Position = UDim2.new(0.5, -230, 0.5, -230)})
-	shadowTween:Play()
+		MainFrame.Size = UDim2.new(0, 10, 0, 10)
+		MainFrame.Position = UDim2.new(0.5, -5, 0.5, -5)
+		MainFrame.BackgroundTransparency = 1
 
-	sizeTween.Completed:Connect(function()
-		IsAnimating = false
-		IsMenuOpen = true
+		local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+		local sizeTween = TweenService:Create(MainFrame, tweenInfo, {Size = OriginalSize, Position = UDim2.new(0.5, -225, 0.5, -225)})
+		local transparencyTween = TweenService:Create(MainFrame, TweenInfo.new(0.2), {BackgroundTransparency = 0.1})
+
+		sizeTween:Play()
+		transparencyTween:Play()
+
+		local shadowTween = TweenService:Create(MainShadow, tweenInfo, {Size = UDim2.new(1, 10, 1, 10), Position = UDim2.new(0.5, -230, 0.5, -230)})
+		shadowTween:Play()
+
+		sizeTween.Completed:Connect(function()
+			IsAnimating = false
+			IsMenuOpen = true
+		end)
 	end)
 end
 
+-- MODIFIED: Close menu function with round button
 local function closeMenu()
 	if IsAnimating then return end
 	IsAnimating = true
@@ -1031,9 +1089,29 @@ local function closeMenu()
 	sizeTween.Completed:Connect(function()
 		MainFrame.Visible = false
 		MainShadow.Visible = false
-		InsertText.Visible = true
+		InsertText.Visible = false
 		IsAnimating = false
 		IsMenuOpen = false
+
+		-- Show round button with animation
+		RoundCloseButton.Visible = true
+		RoundCloseShadow.Visible = true
+		RoundCloseButton.Size = UDim2.new(0, 10, 0, 10)
+		RoundCloseButton.Position = UDim2.new(0.5, -5, 0.5, -5)
+		RoundCloseButton.BackgroundTransparency = 1
+
+		local roundTween = TweenService:Create(RoundCloseButton, tweenInfo, {
+			Size = UDim2.new(0, 60, 0, 60),
+			Position = UDim2.new(0.5, -30, 0.5, -30),
+			BackgroundTransparency = 0.1
+		})
+		roundTween:Play()
+
+		local shadowRoundTween = TweenService:Create(RoundCloseShadow, tweenInfo, {
+			Size = UDim2.new(1, 10, 1, 10),
+			Position = UDim2.new(0, -5, 0, -5)
+		})
+		shadowRoundTween:Play()
 	end)
 end
 
@@ -1212,6 +1290,19 @@ TelegramButton.MouseLeave:Connect(function()
 	tween:Play()
 end)
 
+-- ADDED: Round button hover effect
+RoundCloseButton.MouseEnter:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(RoundCloseButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(80, 80, 120)})
+	tween:Play()
+end)
+
+RoundCloseButton.MouseLeave:Connect(function()
+	local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	local tween = TweenService:Create(RoundCloseButton, tweenInfo, {BackgroundColor3 = Color3.fromRGB(60, 60, 100)})
+	tween:Play()
+end)
+
 -- Setup hover for all buttons
 local allButtons = {ChamsToggle, SkeletonToggle, ExampleButton1, ExampleButton2, RageButton1, RageButton2, RageButton3, SpeedHackToggle, FlyHackToggle, NoClipToggle}
 for _, button in pairs(allButtons) do
@@ -1286,6 +1377,13 @@ end
 -- Close menu
 CloseButton.MouseButton1Click:Connect(function()
 	closeMenu()
+end)
+
+-- ADDED: Round button click event
+RoundCloseButton.MouseButton1Click:Connect(function()
+	if not IsAnimating then
+		openMenu()
+	end
 end)
 
 -- Initial setup
