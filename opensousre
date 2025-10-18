@@ -1290,6 +1290,6 @@ end)
 
 -- Initial setup
 InsertText.Visible = true
-MainFrame.Visible = false
-MainShadow.Visible = false
+MainFrame.Visible = true
+MainShadow.Visible = true
 switchTab("Main")
